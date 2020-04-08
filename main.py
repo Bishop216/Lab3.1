@@ -21,15 +21,17 @@ class App(kivy.app.App):
     def Message(self, btn):
         input = self.textInput.text
         if input.isdigit():
-            F, S = self.factorization(int(input))
-            self.label.text = f"n = {int(input)}.\nF = {F}.\nS = {S}."
+            F, S, iterations = self.factorization(int(input))
+            self.label.text = f"n = {int(input)}.\nF = {F}.\nS = {S}. \nКоличество итераций: {iterations}"
         else:
             self.label.text = "Введите число"
 
     def factorization(self, n):
         s = math.ceil(math.sqrt(n))
         k = 0
+        count = 0
         while True:
+            count += 1
             x = s + k
             y_2 = x**2 - n
             y = int(math.sqrt(y_2))
@@ -44,7 +46,7 @@ class App(kivy.app.App):
         
         p = x + y
         q = x - y
-        return p, q
+        return p, q, count
 
 
 if __name__ == "__main__":
